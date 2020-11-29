@@ -16,7 +16,8 @@ namespace Price_Prediction.Controllers
 
             // Try model on sample data to predict fair price
             ModelOutput result = predEngine.Predict(input);
-
+            if (input.Passenger_count == 0 && input.Trip_distance == 0 && input.Trip_time_in_secs == 0)
+                result.Score = 0;
             ViewBag.Price = result.Score;
             return View(input);
         }
